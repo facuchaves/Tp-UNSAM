@@ -15,12 +15,13 @@ public class Call {
 	private Long id;
 	private CallStatus callStatus;
 	private String origin;
-	private Double maxDuration;
+	private Long maxDuration;//Expresed in miliseconds
 
 	public Call() {
 		Random random =  new Random();//TODO Ver como evitar esto
 		
-		maxDuration = ( 5 + ( 5 * random.nextDouble() ) );
+		maxDuration = ( 5000l + ( 5000l * (long)random.nextDouble() ) );
+		callStatus = CallStatus.NEW;
 	}
 	
 	public void validate(){
@@ -52,6 +53,14 @@ public class Call {
 	
 	public void setOrigin(String origin) {
 		this.origin = origin;
+	}
+	
+	public Long getMaxDuration() {
+		return maxDuration;
+	}
+	
+	public void setMaxDuration(Long maxDuration) {
+		this.maxDuration = maxDuration;
 	}
 	
 }

@@ -8,6 +8,7 @@ package ar.com.almundo.examen.model;
  *
  */
 public enum CallStatus {
+	NEW,
 	INCOMING,
 	IN_PROGRESS,
 	SUSPEND,

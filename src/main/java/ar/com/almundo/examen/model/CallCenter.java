@@ -3,10 +3,14 @@
  */
 package ar.com.almundo.examen.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.log4j.Logger;
+
 import ar.com.almundo.examen.model.exception.NotEmployeesPresent;
+import ar.com.almundo.examen.model.utils.Utils;
 
 /**
  * @author facundo.lopez
@@ -14,8 +18,9 @@ import ar.com.almundo.examen.model.exception.NotEmployeesPresent;
  */
 public class CallCenter {
 	
-	private List<Employee> employees;
+	private List<Employee> employees = new ArrayList<Employee>();
 	private String name;
+	private Logger logger = Logger.getLogger(CallCenter.class);
 	
 	/**
 	 * 
@@ -31,12 +36,13 @@ public class CallCenter {
 	 * 
 	 * @param call
 	 * @throws NotEmployeesPresent 
+	 * @throws InterruptedException 
 	 */
-	public void takeCall(Call call) throws NotEmployeesPresent{
+	public void takeCall(Call call) throws NotEmployeesPresent, InterruptedException{
 		
 		System.out.println("Taken call " + call.getId() + " in callcenter " + name);
 		
-		Optional<Employee> employeeToTakeCall = getEmployees().stream().findFirst();//TODO Agregar comparador por tipo de clase.
+		Optional<Employee> employeeToTakeCall = Utils.findEmpleyeeToTakeCall( getEmployees() );
 		
 		if( !employeeToTakeCall.isPresent() ){
 			System.err.println("There is no employee to take call " + call.getId());
@@ -55,4 +61,7 @@ public class CallCenter {
 		this.employees = employees;
 	}
 	
+	public void addEmployee(Employee employee){
+		employees.add(employee);
+	}
 }

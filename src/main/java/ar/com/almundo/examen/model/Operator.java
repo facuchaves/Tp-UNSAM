@@ -8,5 +8,7 @@ package ar.com.almundo.examen.model;
  *
  */
 public class Operator extends Employee {
-
+	public Operator() {
+		setHierarchy( Hierarchy.OPEARTOR );
+	}
 }
