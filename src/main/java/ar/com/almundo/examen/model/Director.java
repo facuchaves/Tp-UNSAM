@@ -9,6 +9,7 @@ package ar.com.almundo.examen.model;
  */
 public class Director extends Employee {
 	public Director() {
+		super();
 		setHierarchy( Hierarchy.DIRECTOR );
 	}
 }

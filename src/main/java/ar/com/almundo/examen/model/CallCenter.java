@@ -38,14 +38,14 @@ public class CallCenter {
 	 * @throws NotEmployeesPresent 
 	 * @throws InterruptedException 
 	 */
-	public void takeCall(Call call) throws NotEmployeesPresent, InterruptedException{
+	public void takeCall(Call call) throws NotEmployeesPresent{
 		
-		System.out.println("Taken call " + call.getId() + " in callcenter " + name);
+		logger.info("Taken call " + call.getId() + " in callcenter " + name);
 		
 		Optional<Employee> employeeToTakeCall = Utils.findEmpleyeeToTakeCall( getEmployees() );
 		
 		if( !employeeToTakeCall.isPresent() ){
-			System.err.println("There is no employee to take call " + call.getId());
+			logger.error("There is no employee to take call " + call.getId());
 			throw new NotEmployeesPresent("There is no employee to take call " + call.getId());
 		}
 		

@@ -30,30 +30,26 @@ public class Dispatcher {
 	
 	public void dispatchCall(Call call) throws InterruptedException {
 		
-		System.out.println("Distpaching call from origin " + call.getOrigin() );
-		
-		increaseQuantityCalls();
+		logger.info("Distpaching call from origin " + call.getOrigin() );
 
-		if( quantityActualsCalls <= MAX_CALLS ){
+		takeNextPendingCall();
+
+		if( quantityActualsCalls < MAX_CALLS ){
 		
+			increaseQuantityCalls();
 			ExecutorService executor = Executors.newSingleThreadExecutor();
 			futures.add( executor.submit(() -> {
-				try {
-					takeCall(call);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				takeCall(call);
 			}) );
 		
 		} else{
 			
-			System.out.println("The max number of calls are used. The call " + call.getId() + " is now in queue ");
+			logger.info("The max number of calls are used. The call " + call.getId() + " is now in queue ");
 			pendingCalls.add(call);
 			
 		}
 //		for (@SuppressWarnings("unused") Future<?> future : futures) {
-//			System.out.println("The thread " + Thread.currentThread() + "is now free.Try to take a pending call.");
+//			logger.info("The thread " + Thread.currentThread() + "is now free.Try to take a pending call.");
 //			takeNextPendingCall();
 //		}
 	}
@@ -62,13 +58,14 @@ public class Dispatcher {
 	 * If has a pending call, take it.Otherway nothing is doing.
 	 * @throws InterruptedException 
 	 */
-	private void takeNextPendingCall() throws InterruptedException {
+	private void takeNextPendingCall() {
 		
 		Call pendingCall = getNextPendingCall();
 		
 		if( pendingCall != null ){
-			System.out.println("Taking pending call " + pendingCall.getId());
+			logger.info("Taking pending call " + pendingCall.getId());
 			
+			increaseQuantityCalls();
 			takeCall( pendingCall );
 		}
 		
@@ -78,7 +75,12 @@ public class Dispatcher {
 		return pendingCalls.poll();
 	}
 	
-	private void takeCall(Call call) throws InterruptedException {
+	/**
+	 * Take a call, if there are not employee available to take it, add the call to a list of pendings.
+	 * 
+	 * @param call
+	 */
+	private void takeCall(Call call) {
 		
 		try {
 			callCenter.takeCall(call);

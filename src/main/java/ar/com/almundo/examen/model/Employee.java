@@ -12,9 +12,13 @@ import org.apache.log4j.Logger;
 public abstract class Employee implements Comparable<Employee>{
 	
 	private String name;
-	private Logger logger = Logger.getLogger( Employee.class );
+	private Logger logger = Logger.getRootLogger();// Employee.class );
 	private Hierarchy hierarchy;
+	private EmployeeStatus employeeStatus;
 	
+	public Employee() {
+		setEmployeeStatus( EmployeeStatus.AVAILABLE );
+	}
 	
 	/**
 	 * The employee take a call from parameters.
@@ -22,15 +26,25 @@ public abstract class Employee implements Comparable<Employee>{
 	 * @param call
 	 * @throws InterruptedException 
 	 */
-	public void takeCall(Call call) throws InterruptedException{
-		System.out.println("Employee " + name + " take call " + call.getId() );
+	public void takeCall(Call call) {
+		logger.info("Employee " + name + " take call " + call.getId() );
 		call.setCallStatus(CallStatus.IN_PROGRESS);
-	
+		setEmployeeStatus( EmployeeStatus.BUSY );
+		
 		//Some logic here
-		Thread.sleep( call.getMaxDuration() );
+		try {
+			/*
+			 *  Esto esta dentro de un try-catch, porque en realidad nunca se va a hacer un sleep, es simplemente para simularlo.
+			 *  Con lo cual nunca se daria un InterruptedException y no quise ensuciar el codigo con throws en los metodos
+			 */
+			Thread.sleep( call.getMaxDuration() );   
+		} catch (InterruptedException e) {
+			logger.error("Se interumpio la llamada.");
+		}
 		
 		call.setCallStatus(CallStatus.END);
-		System.out.println("Employee " + name + " end call " + call.getOrigin() );
+		setEmployeeStatus( EmployeeStatus.AVAILABLE );
+		logger.info("Employee " + name + " end call " + call.getOrigin() );
 	}
 
 	public String getName() {
@@ -51,6 +65,14 @@ public abstract class Employee implements Comparable<Employee>{
 	
 	public int compareTo(Employee otherEmployee) {
 		return this.hierarchy.compareTo( otherEmployee.getHierarchy() );
+	}
+	
+	public EmployeeStatus getEmployeeStatus() {
+		return employeeStatus;
+	}
+	
+	public void setEmployeeStatus(EmployeeStatus employeeStatus) {
+		this.employeeStatus = employeeStatus;
 	}
 	
 }

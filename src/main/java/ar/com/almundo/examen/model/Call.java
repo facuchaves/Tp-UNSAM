@@ -5,8 +5,6 @@ package ar.com.almundo.examen.model;
 
 import java.util.Random;
 
-import ar.com.almundo.examen.model.exception.ExceededTimeCall;
-
 /**
  * @author facundo.lopez
  *
@@ -22,13 +20,6 @@ public class Call {
 		
 		maxDuration = ( 5000l + ( 5000l * (long)random.nextDouble() ) );
 		callStatus = CallStatus.NEW;
-	}
-	
-	public void validate(){
-//		if( duration > maxDuration ){
-//			System.err.println("The call " + getId() + " exceeded the max duration. The max duration are " + maxDuration + " but the call dure " + duration);
-//			throw new ExceededTimeCall();
-//		}
 	}
 	
 	public Long getId() {
