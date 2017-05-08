@@ -24,13 +24,13 @@ public class Dispatcher {
 	private final int MAX_CALLS = 10;//Esto podria estar en un archivo properties o en la  BBDD.
 	private int quantityActualsCalls = 0;
 	private CallCenter  callCenter = new CallCenter();
-	private Logger logger = Logger.getLogger( Dispatcher.class );
+	private Logger logger = Logger.getRootLogger();
 	private Queue<Call> pendingCalls = new LinkedBlockingDeque<Call>();
 	private List<Future<?>> futures = new ArrayList<Future<?>>();
 	
 	public void dispatchCall(Call call) throws InterruptedException {
 		
-		logger.info("Distpaching call from origin " + call.getOrigin() );
+		System.out.println("Distpaching call from origin " + call.getOrigin() );
 
 		takeNextPendingCall();
 
@@ -44,12 +44,12 @@ public class Dispatcher {
 		
 		} else{
 			
-			logger.info("The max number of calls are used. The call " + call.getId() + " is now in queue ");
+			System.out.println("The max number of calls are used. The call " + call.getId() + " is now in queue ");
 			pendingCalls.add(call);
 			
 		}
 //		for (@SuppressWarnings("unused") Future<?> future : futures) {
-//			logger.info("The thread " + Thread.currentThread() + "is now free.Try to take a pending call.");
+//			System.out.println("The thread " + Thread.currentThread() + "is now free.Try to take a pending call.");
 //			takeNextPendingCall();
 //		}
 	}
@@ -63,7 +63,7 @@ public class Dispatcher {
 		Call pendingCall = getNextPendingCall();
 		
 		if( pendingCall != null ){
-			logger.info("Taking pending call " + pendingCall.getId());
+			System.out.println("Taking pending call " + pendingCall.getId());
 			
 			increaseQuantityCalls();
 			takeCall( pendingCall );

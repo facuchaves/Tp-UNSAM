@@ -27,7 +27,7 @@ public abstract class Employee implements Comparable<Employee>{
 	 * @throws InterruptedException 
 	 */
 	public void takeCall(Call call) {
-		logger.info("Employee " + name + " take call " + call.getId() );
+		System.out.println("Employee " + name + " take call " + call.getId() );
 		call.setCallStatus(CallStatus.IN_PROGRESS);
 		setEmployeeStatus( EmployeeStatus.BUSY );
 		
@@ -39,12 +39,12 @@ public abstract class Employee implements Comparable<Employee>{
 			 */
 			Thread.sleep( call.getMaxDuration() );   
 		} catch (InterruptedException e) {
-			logger.error("Se interumpio la llamada.");
+			System.err.println("Se interumpio la llamada.");
 		}
 		
 		call.setCallStatus(CallStatus.END);
 		setEmployeeStatus( EmployeeStatus.AVAILABLE );
-		logger.info("Employee " + name + " end call " + call.getOrigin() );
+		System.out.println("Employee " + name + " end call " + call.getOrigin() );
 	}
 
 	public String getName() {

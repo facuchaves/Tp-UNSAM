@@ -20,7 +20,7 @@ public class CallCenter {
 	
 	private List<Employee> employees = new ArrayList<Employee>();
 	private String name;
-	private Logger logger = Logger.getLogger(CallCenter.class);
+	private Logger logger = Logger.getRootLogger();
 	
 	/**
 	 * 
@@ -40,12 +40,12 @@ public class CallCenter {
 	 */
 	public void takeCall(Call call) throws NotEmployeesPresent{
 		
-		logger.info("Taken call " + call.getId() + " in callcenter " + name);
+		System.out.println("Taken call " + call.getId() + " in callcenter " + name);
 		
 		Optional<Employee> employeeToTakeCall = Utils.findEmpleyeeToTakeCall( getEmployees() );
 		
 		if( !employeeToTakeCall.isPresent() ){
-			logger.error("There is no employee to take call " + call.getId());
+			System.err.println("There is no employee to take call " + call.getId());
 			throw new NotEmployeesPresent("There is no employee to take call " + call.getId());
 		}
 		
