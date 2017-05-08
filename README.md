@@ -1,7 +1,5 @@
 # EjercicioAlMundo
 
-# Diagramas
-
 # Diagrama de clases.
 
 ![alt text](https://github.com/facuchaves/EjercicioAlMundo/blob/master/Images/DiagramaDeClases.png)
