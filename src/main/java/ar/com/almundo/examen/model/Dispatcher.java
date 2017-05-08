@@ -21,7 +21,7 @@ import ar.com.almundo.examen.model.exception.NotEmployeesPresent;
  */
 public class Dispatcher {
 	
-	private final int MAX_CALLS = 10;//TODO Esto podria estar en un archivo properties o en la  BBDD.
+	private final int MAX_CALLS = 10;//Esto podria estar en un archivo properties o en la  BBDD.
 	private int quantityActualsCalls = 0;
 	private CallCenter  callCenter = new CallCenter();
 	private Logger logger = Logger.getLogger( Dispatcher.class );

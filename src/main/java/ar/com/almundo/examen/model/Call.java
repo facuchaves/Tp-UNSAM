@@ -16,7 +16,7 @@ public class Call {
 	private Long maxDuration;//Expresed in miliseconds
 
 	public Call() {
-		Random random =  new Random();//TODO Ver como evitar esto
+		Random random =  new Random();
 		
 		maxDuration = ( 5000l + ( 5000l * (long)random.nextDouble() ) );
 		callStatus = CallStatus.NEW;
