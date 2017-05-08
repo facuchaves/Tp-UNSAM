@@ -1,16 +1,16 @@
 # EjercicioAlMundo
 
-#Diagramas
+# Diagramas
 
-#Diagrama de clases.
+# Diagrama de clases.
 
 ![alt text](https://github.com/facuchaves/EjercicioAlMundo/blob/master/Images/DiagramaDeClases.png)
 
-#Diagrama de secuencia.
+# Diagrama de secuencia.
 
 ![alt text](https://github.com/facuchaves/EjercicioAlMundo/blob/master/Images/DiagramaDeSecuencia.png)
 
-#Diagrama de estado.
+# Diagrama de estado.
 
 ![alt text](https://github.com/facuchaves/EjercicioAlMundo/blob/master/Images/DiagramaDeEstados.png)
 
