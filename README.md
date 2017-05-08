@@ -4,9 +4,15 @@ Diagramas
 
 Diagrama de clases.
 
+![alt text](https://github.com/facuchaves/EjercicioAlMundo/blob/master/Images/DiagramaDeClases.png)
+
 Diagrama de secuencia.
 
+![alt text](https://github.com/facuchaves/EjercicioAlMundo/blob/master/Images/DiagramaDeSecuencia.png)
+
 Diagrama de estado.
+
+![alt text](https://github.com/facuchaves/EjercicioAlMundo/blob/master/Images/DiagramaDeEstados.png)
 
 La solución planteada consiste en un CallCenter con una lista de empleados. Cuando llega una llamada, se busca en esa lista un empleado que esté libre para atender la llamada, respetando el orden de primero buscar operadores, luego supervisores y finalmente directores. Si no hubiese empleados para atender la llamada, se lanza una excepción. Desde el dispatcher, se captura esta excepción y se encola esta llamada, para que la aplicación no falle y sea más robusta. Una vez que se halla desocupado algún empleado, la llamada se recibira.
 
